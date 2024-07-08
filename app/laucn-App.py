@@ -15,9 +15,15 @@
 # response = requests.post(url, json=my_data)
 # print(response.json())
 import openai
+import os
+from dotenv import load_dotenv
 
-openai.api_key = 'sk-proj-BpvKKm6WuknFCP0n4uCCT3BlbkFJTkAn3sNAKqbIh3rMcmAx'
+load_dotenv()
 
-models = openai.Model.list()
+client = openai.OpenAI(
+    api_key = os.environ.get("API_KEY"),
+)
+
+models = client.models.list()
 for model in models['data']:
     print(model['id'])
